@@ -1,0 +1,45 @@
+<div class="container">
+  <div *ngIf="!finished">
+    <div *ngIf="iterationPolls" class="progress-container">
+      <div *ngFor="let i of iterationPolls" class="elem-progress" [ngClass]="{'actived': i < startStep}">
+        <div class="circle-step" (click)="openPoll(i)" [ngClass]="{'active': i <= startStep}">
+          <div class="circle-elem">{{i + 1}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="dataPolls[0]">
+      <div class="title">
+        <h2>{{dataPolls[startStep].title}}</h2>
+        <div class="children-container">
+          <div class="flex-elem-children" *ngFor="let el of dataPolls[startStep].children"
+               [ngClass]="{'active': el.isActive, 'error': errorChecked}" (click)="checkElem(el.index)">
+            <div class="children-element">
+              <img src="{{el.picture}}" alt="picture">
+              <div>{{el.name.first}} {{el.name.last}}</div>
+              <div class="balance">{{el.balance}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-nav-container">
+      <input type="button" value="Previous" [disabled]="startStep === 0" (click)="togglePoll(false)">
+      <input *ngIf="startStep !== iterationPolls.length - 1" type="button" value="Next" (click)="togglePoll(true)">
+      <input *ngIf="startStep === iterationPolls.length - 1" type="button" value="Finish" (click)="viewResult()">
+    </div>
+  </div>
+  <div *ngIf="finished">
+    <h2>Your result:</h2>
+    <div class="children-container">
+      <div class="flex-elem-children" *ngFor="let el of resultPolls, let i = index">
+        <h3>Task {{i}}</h3>
+        <div class="children-element">
+          <img src="{{el.picture}}" alt="picture">
+          <div>{{el.name.first}} {{el.name.last}}</div>
+          <div class="balance">{{el.balance}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

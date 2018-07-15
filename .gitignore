@@ -1,4 +1,2 @@
-/steam-bot-service/**
 **/node_modules
-.idea/workspace.xml
-**/.env
+**/.idea
