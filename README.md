@@ -24,7 +24,11 @@
 
     + `npm install` - install all package
 
-    + `npm run start` - start and build project
+    + `npm run build` - build project 
+
+    + `npm run start` - start project 
+    
+    + `http://localhost:4200/` - open site in browser
 
 ## **4. Stack**
 

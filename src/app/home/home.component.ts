@@ -22,17 +22,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.pollsService.init().then(callback => {
-      if (callback && !this.connectionPolls) {
-        this.connectionPolls = this.pollsService.getPollsUpdates().subscribe(update => {
-          this.dataPolls = Object.assign({}, this.dataPolls, update);
-          console.log(this.dataPolls);
-          const length = Object.keys(this.dataPolls).length;
-          for (let i = 0; i < length; i++) {
-            this.iterationPolls.push(i);
-            this.getValueChecked(i);
-          }
-        });
+    this.pollsService.init().then(update => {
+      this.dataPolls = Object.assign({}, this.dataPolls, update);
+      const length = Object.keys(this.dataPolls).length;
+      for (let i = 0; i < length; i++) {
+        this.iterationPolls.push(i);
+        this.getValueChecked(i);
       }
     });
   }
@@ -91,8 +86,5 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.connectionPolls) {
-      this.connectionPolls.unsubscribe();
-    }
   }
 }
